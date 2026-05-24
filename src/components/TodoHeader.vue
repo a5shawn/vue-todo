@@ -26,11 +26,11 @@
   </header>
 </template>
 
-<script setup>
+<script setup lang="ts">
 import { ref, computed, onMounted } from 'vue'
 
-const emit = defineEmits(['add'])
-const inputRef = ref(null)
+const emit = defineEmits<{ add: [text: string] }>()
+const inputRef = ref<HTMLInputElement | null>(null)
 const newTodo = ref('')
 
 const now = new Date()

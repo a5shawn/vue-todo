@@ -1,12 +1,15 @@
-import { ref, computed, watch } from 'vue'
+import { ref, computed, watch, type Ref, type ComputedRef } from 'vue'
+import type { TodoItem, FilterType } from '@/types/todo'
 
 const STORAGE_KEY = 'vue-todo-items'
 
 export function useTodos() {
-  const todos = ref(JSON.parse(localStorage.getItem(STORAGE_KEY) || '[]'))
-  const filter = ref('all')
+  const todos: Ref<TodoItem[]> = ref(
+    JSON.parse(localStorage.getItem(STORAGE_KEY) || '[]'),
+  )
+  const filter: Ref<FilterType> = ref('all')
 
-  const filteredTodos = computed(() => {
+  const filteredTodos: ComputedRef<TodoItem[]> = computed(() => {
     switch (filter.value) {
       case 'active':
         return todos.value.filter((t) => !t.done)
@@ -17,7 +20,9 @@ export function useTodos() {
     }
   })
 
-  const activeCount = computed(() => todos.value.filter((t) => !t.done).length)
+  const activeCount: ComputedRef<number> = computed(
+    () => todos.value.filter((t) => !t.done).length,
+  )
 
   watch(
     todos,
@@ -27,7 +32,7 @@ export function useTodos() {
     { deep: true },
   )
 
-  function addTodo(text) {
+  function addTodo(text: string): void {
     todos.value.unshift({
       id: Date.now(),
       text,
@@ -36,16 +41,16 @@ export function useTodos() {
     })
   }
 
-  function toggleTodo(id) {
+  function toggleTodo(id: number): void {
     const todo = todos.value.find((t) => t.id === id)
     if (todo) todo.done = !todo.done
   }
 
-  function removeTodo(id) {
+  function removeTodo(id: number): void {
     todos.value = todos.value.filter((t) => t.id !== id)
   }
 
-  function clearCompleted() {
+  function clearCompleted(): void {
     todos.value = todos.value.filter((t) => !t.done)
   }
 

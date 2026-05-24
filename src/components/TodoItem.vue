@@ -39,15 +39,19 @@
   </div>
 </template>
 
-<script setup>
+<script setup lang="ts">
 import { ref, onMounted } from 'vue'
+import type { TodoItem as TodoItemType } from '@/types/todo'
 
-const props = defineProps({
-  todo: { type: Object, required: true },
-  index: { type: Number, default: 0 },
-})
+const props = defineProps<{
+  todo: TodoItemType
+  index: number
+}>()
 
-defineEmits(['toggle', 'remove'])
+defineEmits<{
+  toggle: [id: number]
+  remove: [id: number]
+}>()
 
 const isNew = ref(
   props.todo.createdAt && Date.now() - props.todo.createdAt < 2000,

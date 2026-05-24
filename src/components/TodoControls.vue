@@ -22,19 +22,23 @@
   </div>
 </template>
 
-<script setup>
+<script setup lang="ts">
 import { computed } from 'vue'
+import type { FilterType } from '@/types/todo'
 
-const props = defineProps({
-  totalCount: { type: Number, default: 0 },
-  activeCount: { type: Number, default: 0 },
-  currentFilter: { type: String, default: 'all' },
-  hasCompleted: { type: Boolean, default: false },
-})
+const props = defineProps<{
+  totalCount: number
+  activeCount: number
+  currentFilter: FilterType
+  hasCompleted: boolean
+}>()
 
-defineEmits(['update:filter', 'clear-completed'])
+defineEmits<{
+  'update:filter': [value: FilterType]
+  'clear-completed': []
+}>()
 
-const filters = [
+const filters: { key: FilterType; label: string }[] = [
   { key: 'all', label: '全部' },
   { key: 'active', label: '进行中' },
   { key: 'completed', label: '已完成' },

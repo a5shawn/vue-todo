@@ -46,13 +46,20 @@
   </div>
 </template>
 
-<script setup>
-import TodoItem from './TodoItem.vue'
+<script setup lang="ts">
+import type {
+  TodoItem as TodoItemType,
+  FilterType,
+} from '@/types/todo'
+import TodoItemComponent from '@/components/TodoItem.vue'
 
-defineProps({
-  todos: { type: Array, required: true },
-  filter: { type: String, default: 'all' },
-})
+defineProps<{
+  todos: TodoItemType[]
+  filter: FilterType
+}>()
 
-defineEmits(['toggle', 'remove'])
+defineEmits<{
+  toggle: [id: number]
+  remove: [id: number]
+}>()
 </script>
