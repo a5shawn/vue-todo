@@ -47,11 +47,8 @@
 </template>
 
 <script setup lang="ts">
-import type {
-  TodoItem as TodoItemType,
-  FilterType,
-} from '@/types/todo'
-import TodoItemComponent from '@/components/TodoItem.vue'
+import type { TodoItem as TodoItemType, FilterType } from '@/types/todo'
+import TodoItem from '@/components/TodoItem.vue'
 
 defineProps<{
   todos: TodoItemType[]
