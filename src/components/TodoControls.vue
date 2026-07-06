@@ -12,11 +12,7 @@
         {{ f.label }}
       </button>
     </div>
-    <button
-      v-if="hasCompleted"
-      class="clear-btn"
-      @click="$emit('clear-completed')"
-    >
+    <button v-if="hasCompleted" class="clear-btn" @click="handleClear">
       清除已完成
     </button>
   </div>
@@ -33,7 +29,7 @@ const props = defineProps<{
   hasCompleted: boolean
 }>()
 
-defineEmits<{
+const emit = defineEmits<{
   'update:filter': [value: FilterType]
   'clear-completed': []
 }>()
@@ -43,4 +39,10 @@ const filters: { key: FilterType; label: string }[] = [
   { key: 'active', label: '进行中' },
   { key: 'completed', label: '已完成' },
 ]
+
+function handleClear() {
+  if (window.confirm('确定清除所有已完成的事项？')) {
+    emit('clear-completed')
+  }
+}
 </script>

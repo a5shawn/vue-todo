@@ -12,6 +12,7 @@
           :filter="filter"
           @toggle="toggleTodo"
           @remove="removeTodo"
+          @edit="editTodo"
         />
       </main>
       <TodoControls
@@ -39,6 +40,7 @@ const {
   activeCount,
   addTodo,
   toggleTodo,
+  editTodo,
   removeTodo,
   clearCompleted,
 } = useTodos()

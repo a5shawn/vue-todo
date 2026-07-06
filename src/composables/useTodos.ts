@@ -46,6 +46,11 @@ export function useTodos() {
     if (todo) todo.done = !todo.done
   }
 
+  function editTodo(id: number, text: string): void {
+    const todo = todos.value.find((t) => t.id === id)
+    if (todo) todo.text = text
+  }
+
   function removeTodo(id: number): void {
     todos.value = todos.value.filter((t) => t.id !== id)
   }
@@ -61,6 +66,7 @@ export function useTodos() {
     activeCount,
     addTodo,
     toggleTodo,
+    editTodo,
     removeTodo,
     clearCompleted,
   }

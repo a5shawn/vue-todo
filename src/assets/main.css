@@ -2,7 +2,7 @@
    CSS Variables — Design System
    ============================================ */
 :root {
-  --bg-primary: #faf8f5;
+  --bg-primary: #ffffff;
   --bg-surface: #ffffff;
   --bg-elevated: #f5f2ed;
   --text-primary: #1c1a17;
@@ -298,6 +298,43 @@ body {
 .todo-item.is-done .todo-text {
   color: var(--text-muted);
   text-decoration: line-through;
+}
+
+/* --- Edit Input --- */
+.todo-edit-input {
+  flex: 1;
+  background: var(--bg-elevated);
+  border: 1px solid var(--accent);
+  outline: none;
+  padding: 4px 8px;
+  font-family: var(--font-body);
+  font-size: 15px;
+  color: var(--text-primary);
+  border-radius: var(--radius-sm);
+  font-weight: 400;
+  letter-spacing: 0.01em;
+}
+
+/* --- Edit Button --- */
+.todo-edit-btn {
+  flex-shrink: 0;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 4px;
+  color: var(--text-muted);
+  opacity: 0;
+  transition:
+    opacity 0.15s,
+    color 0.15s;
+}
+
+.todo-item:hover .todo-edit-btn {
+  opacity: 1;
+}
+
+.todo-edit-btn:hover {
+  color: var(--text-secondary);
 }
 
 /* --- Delete --- */

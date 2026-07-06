@@ -8,6 +8,7 @@
         :index="index"
         @toggle="$emit('toggle', $event)"
         @remove="$emit('remove', $event)"
+        @edit="(id, text) => $emit('edit', id, text)"
       />
     </TransitionGroup>
     <div class="todo-empty" v-else>
@@ -58,5 +59,6 @@ defineProps<{
 defineEmits<{
   toggle: [id: number]
   remove: [id: number]
+  edit: [id: number, text: string]
 }>()
 </script>
