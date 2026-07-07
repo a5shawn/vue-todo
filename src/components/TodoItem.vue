@@ -42,7 +42,7 @@
     >{{ todo.text }}</span>
 
     <button
-      v-if="!isEditing"
+      v-if="!isEditing && !todo.done"
       class="todo-edit-btn"
       @click="startEdit"
       title="编辑"
@@ -102,6 +102,7 @@ onMounted(() => {
 })
 
 function startEdit() {
+  if (props.todo.done) return
   editText.value = props.todo.text
   isEditing.value = true
   nextTick(() => {
